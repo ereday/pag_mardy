@@ -1,7 +1,6 @@
 # MARDY - PaG
 
-This repository contains Claim Identifier and Claim Classifier models trained on German newspaper articles. For more information,
-please refer to this paper. 
+This repository contains Claim Identifier and Claim Classifier models trained on German newspaper articles. For more information, please refer to [this](https://www.aclweb.org/anthology/P19-1273.pdf) paper. 
 
 ## Dependencies
    - Python 3.x
@@ -19,6 +18,7 @@ please refer to this paper.
    and each non-empty line should consists of three tab separated fields: `WordIndex\tWord\tLabel`
     Example input file (`input.conllu`):
    ```
+   
      	     1       Darunter        O
 	     2       sollen  O
 	     3       sich    O
@@ -60,38 +60,41 @@ please refer to this paper.
 	     14      scharf  I-Claim
 	     15      kritisiert      I-Claim
 	     16      .       I-Claim
-	     ```
+```
 
-    - To run claim identifier one can use the following command:
+   
+   - To run claim identifier one can use the following command:
       ```
 	cd pag_mardy
 	export CUDA_VISIBLE_DEVICES=0
 	export model=./saved_models/claim_identifier_model.bin
 	export out_fname="claim_identifier_predictions.out"
 	export input_fname="./data/input.conllu"
-	python run_tagger.py --file_dir ${input_fname} --load ${model} --tagger_predictions_conllu_fname ${out_fname}      
-      ```
-    - Model outputs predictions as in conllu format as well. 
+	python run_tagger.py --file_dir ${input_fname} --load ${model} --tagger_predictions_conllu_fname ${out_fname}    
+	```
+   - Model outputs predictions as in conllu format as well. 
 
     
 
 ## Using Claim Classifier
    - Unlike Claim Identifier, Claim Classifier works with tsv formatted files.
-   - Example input file (`input.tsv`):
-     	     There are seven fields only two of them (claim, major_classes) are mandatory to use pre-trained claim classifier model:
-	     claim: A sequence of words to be claim. [e.g. Damit sollen straffällige Ausländer , aber auch Menschen ohne Aufenthaltsberechtigung einfacher abgeschoben und mit Wiedereinreisesperren belegt werden können .]
-	     major_classes: Multi-hot vector of length nine. It represents major claims appeared in the dataset (controlling migration; residency; integration; domestic security; foreign policy; economy; society; procedures; other) [e.g. 0 1 0 1 0 0 0 1 0]
-	     minor_classes: Sequence of integers separated by a single space. (Note that: Model does not use this field, you can set it to NONE)
-	     paragraph: Paragraph where the claim appears. (Note that: Model does not use this field, you can set it to NONE)
-	     json_id: Id of the corresponding article. (Note that: Model does not use this field, you can set it to NONE)
-	     actor_values: Name of the actor(s) associated with the corresponding claim. (Note that: Model does not use this field, you can set it to NONE)
-	     claim_stance: Stance of the claim. (Note that: Model does not use this field, you can set it to NONE)
+   - Example input file (`input.tsv`): There are seven fields only two of them (claim, major_classes) are mandatory to use pre-trained claim classifier model:
+		- claim: A sequence of words to be claim. `e.g. Damit sollen straffällige Ausländer , aber auch Menschen ohne Aufenthaltsberechtigung einfacher abgeschoben und mit Wiedereinreisesperren belegt werden können .`
+		- major_classes: Multi-hot vector of length nine. It represents major claims appeared in the dataset (controlling migration; residency; integration; domestic security; foreign policy; economy; society; procedures; other) `e.g. 0 1 0 1 0 0 0 1 0`
+		- minor_classes: Sequence of integers separated by a single space. (Note that: Model does not use this field, you can set it to `NONE`)
+		- paragraph: Paragraph where the claim appears. (Note that: Model does not use this field, you can set it to `NONE`)
+		- json_id: Id of the corresponding article. (Note that: Model does not use this field, you can set it to `NONE`)
+		- actor_values: Name of the actor(s) associated with the corresponding claim. (Note that: Model does not use this field, you can set it to `NONE`)
+		- claim_stance: Stance of the claim. (Note that: Model does not use this field, you can set it to `NONE`)
+	   
+- A valid example:
    ```
    Damit sollen straffällige Ausländer , aber auch Menschen ohne Aufenthaltsberechtigung einfacher abgeschoben und mit Wiedereinreisesperren belegt werden können .        0 1 0 1 0 0 0 1 0       207 404 812     NONE    131203.json     NONE    NONE
    ```
    
    - To run claim classifier please run the following command:
-     	```
+   
+   ```
    	cd pag_mardy
 	export CUDA_VISIBLE_DEVICES=0
 	export model=./saved_models/claim_classifier_model.bin
@@ -102,5 +105,5 @@ please refer to this paper.
 
 
 ## Data:
-   - First version of the dataset is available at here.
+   - First version of the dataset is available at [here](https://github.com/mardy-spp/mardy_acl2019).
 
