@@ -9,7 +9,7 @@ This repository contains Claim Identifier and Claim Classifier models trained on
 
 
 ## Downloading pre-trained models
-   - If you would like to use our pre-trained claim identifier/claim classifier models please download them from here
+   - If you would like to use our pre-trained claim identifier/claim classifier models please download them from [here](http://bit.ly/37bBjbo)
    and put them into ```pag_mardy/claim_identifier/saved_models``` and ```pag_mardy/claim_classifier/saved_models```
    
 
@@ -65,13 +65,13 @@ This repository contains Claim Identifier and Claim Classifier models trained on
    
    - To run claim identifier one can use the following command:
       ```
-	cd pag_mardy
-	export CUDA_VISIBLE_DEVICES=0
-	export model=./saved_models/claim_identifier_model.bin
-	export out_fname="claim_identifier_predictions.out"
-	export input_fname="./data/input.conllu"
-	python run_tagger.py --file_dir ${input_fname} --load ${model} --tagger_predictions_conllu_fname ${out_fname}    
-	```
+      cd pag_mardy
+      export CUDA_VISIBLE_DEVICES=0
+      export model=./saved_models/claim_identifier_model.bin
+      export out_fname="claim_identifier_predictions.out"
+      export input_fname="./data/input.conllu"
+      python run_tagger.py --file_dir ${input_fname} --load ${model} --tagger_predictions_conllu_fname ${out_fname}```
+      
    - Model outputs predictions as in conllu format as well. 
 
     
@@ -106,4 +106,8 @@ This repository contains Claim Identifier and Claim Classifier models trained on
 
 ## Data:
    - First version of the dataset is available at [here](https://github.com/mardy-spp/mardy_acl2019).
+   
+  
+## Web Interface:
+- Claim Identifier is also accessable through the web interface at [here](http://193.196.52.50/). Note that, server-side code is working on an inefficient (cpu-only), free public node. It may take some time to response for large documents. 
 
